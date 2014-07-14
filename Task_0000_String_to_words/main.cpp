@@ -11,14 +11,14 @@ int main()
     int space_index = 0;
     for (int i = 0; i <= LEN; ++i)
     {
-        if (text[i] == ' ')
+        if (text[i] == ' ' || text[i] == 0)
         {
             for (int k = space_index; k <= i; ++k)
             {
                 std::cout << text[k];
                 space_index = k;
             }
-             std::cout <<""<< std::endl;
+            std::cout <<""<< std::endl;
         }
     }
     return 0;
