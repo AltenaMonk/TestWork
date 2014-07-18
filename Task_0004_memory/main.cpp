@@ -3,82 +3,115 @@
 #include <memory.h>
 #define WORD_COUNT 30
 #define WORD_LENGHT 80
-
 int main ()
 {
+// Объявляем переменную для хранения начальной строки.
     char * text = new char[WORD_LENGHT];
-    memset(text, 0, WORD_LENGHT *sizeof(char));
-    char ** word_array = new char * [WORD_COUNT];
-    for (int i = 0; i < WORD_COUNT; ++i)
-    {
-        word_array[i] = new char[WORD_LENGHT];
-        memset(word_array[i], 0, WORD_LENGHT * sizeof(char));
-    }
-    char ** word_brick = new char * [WORD_COUNT];
-    for (int i = 0; i < WORD_COUNT; ++i)
-    {
-        word_brick[i] = new char[WORD_LENGHT];
-        memset(word_brick[i], 0, WORD_LENGHT * sizeof(char));
-    }
-    int * word_index = new int(0);
-    int * char_index = new int(0);
+// Очищаем начальную строку
+    memset(text, 0, WORD_LENGHT * sizeof(char));
+// Вводим начальную строку
     gets(text);
+// Объявляем массив для хранения слов
+    char ** words = new char * [WORD_COUNT];
+// Очищаем массив для хранения строк
     for (int i = 0; i < WORD_COUNT; ++i)
     {
-        for (int j = 0; j < WORD_LENGHT; ++j)
-        {
-            std::cout << word_array[i][j];
-        }
-        std::cout << std::endl;
+        words[i] = new char[WORD_LENGHT];
+        memset(words[i], 0, WORD_LENGHT * sizeof(char));
     }
-    /*for (int i = 0; i < WORD_LENGHT; ++i)
+// Разбиваем начальную строку на массив слов
+    int word_index = 0, char_index = 0;
+    for (int i = 0; i < WORD_LENGHT; ++i)
     {
         if (text[i] == ' ' || text[i] == 0)
         {
-            ++*word_index;
-            *char_index = 0;
+            ++word_index;
+            char_index = 0;
         }
         else
         {
-            word_array[*word_index][*char_index] = text[i];
-            ++*char_index;
+            words[word_index][char_index] = text[i];
+            ++char_index;
         }
         if (text[i] == 0)
         {
             break;
-            delete word_index;
-            delete char_index;
         }
     }
-    delete word_index;
-    delete char_index;
-    int * a = new int(0);
-    int * b = new int(0);
+// Объявляем массив для хранения кирпичных слов
+    char ** brick_words = new char * [WORD_COUNT];
+// Очищаем массив для хранения кирпичных слов
+    for (int i = 0; i < WORD_COUNT; ++i)
+    {
+        brick_words[i] = new char[WORD_LENGHT];
+        memset(brick_words[i], 0, WORD_LENGHT * sizeof(char));
+    }
+// Заполняем массив кирпичных слов из массива слов, параллельно их кирпичинизируя
+    int b_char_count = 0;
+    word_index = 0;
+    char_index = 0;
     for (int i = 0; i < WORD_LENGHT; ++i)
     {
-        if (word_array[*a][*b] == 0)
+        if (words[word_index][char_index] == 0 && word_index > 0)
         {
-            std::cout << std::endl;
-            ++*a;
-            *b = 0;
+            ++word_index;
+            char_index = 0;
+            b_char_count = 0;
+        }
+        else if (words[word_index][char_index] == 'a' ||
+                 words[word_index][char_index] == 'e' ||
+                 words[word_index][char_index] == 'i' ||
+                 words[word_index][char_index] == 'o' ||
+                 words[word_index][char_index] == 'u' ||
+                 words[word_index][char_index] == 'y')
+        {
+            brick_words[word_index][b_char_count+3] = words[word_index][char_index+1];
+            brick_words[word_index][b_char_count+1] = 'k';
+            brick_words[word_index][b_char_count+2] = words[word_index][char_index];
+            ++char_index;
+            b_char_count = b_char_count+3;
         }
         else
         {
-            std::cout << word_array[*a][*b];
+            brick_words[word_index][b_char_count] = words[word_index][char_index];
+            ++char_index;
+            ++b_char_count;
         }
-    }*/
+        if (words[word_index][0] == 0 && word_index > 0)
+        {
+            break;
+        }
+    }
+// Выводим на экран массив кирпичных слов
+    for (int i = 0; i< WORD_COUNT; ++i)
+    {
+        for (int k = 0; k < WORD_LENGHT; ++k)
+        {
+            if (brick_words[i][k] == 0 && i > 0)
+            {
+                ++i;
+                std::cout << std::endl;
+            }
+            else
+            {
+                std::cout << brick_words[i][k];
+            }
+        }
+        if (brick_words[i][0] == 0 && i > 0)
+        std::cout << std::endl;
+    }
+// Удаляем массивы с кирпичными словами
     for (int i = 0; i < WORD_COUNT; ++i)
     {
-        delete []word_array[i];
+        delete[] brick_words[i];
     }
-    delete []word_array;
-    for (int i = 0; WORD_COUNT; ++i)
+    delete[] brick_words;
+// Удаляем массивы с обычными словами
+    for (int i = 0; i < WORD_COUNT; ++i)
     {
-        delete []word_brick[i];
+        delete[] words[i];
     }
-    delete[] word_brick;
-    delete[] text;
-    delete word_index;
-    delete char_index;
+    delete[] words;
+// Удаляем начальную строку... Не добрался досюда.
     return 0;
 }
