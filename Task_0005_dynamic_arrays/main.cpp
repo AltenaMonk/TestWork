@@ -25,10 +25,10 @@ int main()
     {
         word_size[i] = 1;
         words[i] = new char[word_size[i]];
-        memset(words, 0, word_size[i] * sizeof(char));
+        memset(words[i], 0, word_size[i] * sizeof(char));
     }
 
-   /* Контрольный вывод пустого массива для слов
+    /* Контрольный вывод пустого массива для слов
     for (int i = 0; i < WORD_COUNT; ++i)
     {
         for (int j = 0; j < word_size[i]+1; ++j)
@@ -51,29 +51,24 @@ int main()
     {
         if (text[i] == ' ' || text[i] == 0)
         {
-            space_index = i;
-            words[word_index] = new char [word_size[word_index]];
-            memset(words[word_index], 0, word_size[word_index] * sizeof(char));
-            for (int k = 0; k < char_index; ++k)
-            {
-                words[word_index][k] = words[word_index+1][k];
-            }
             ++word_index;
-            delete [] words[word_index];
             char_index = 0;
+            space_index = i;
         }
         else
         {
             if ((i - space_index - word_size[word_index]) == 0)
             {
-                word_size[word_index+1] = word_size[word_index+1]*2;
-                // delete [] words[word_index+1];
-                words[word_index+1] = new char[word_size[word_index+1]];
-                memset(words[word_index+1], 0, word_size[word_index+1] * sizeof(char));
-                for (int k = 0; k < char_index; ++k)
+                int new_size = word_size[word_index] * 2;
+                char * temp = new char[new_size];
+                memset(temp, 0, new_size * sizeof(char));
+                for (int k = 0; k < word_size[word_index]; ++k)
                 {
-                    words[word_index+1][k] = words[word_index][k];
+                    temp[k] = words[word_index][k];
                 }
+                word_size[word_index] = new_size;
+                delete [] words[word_index];
+                words[word_index] = temp;
             }
             words[word_index][char_index] = text[i];
             ++char_index;
@@ -83,5 +78,33 @@ int main()
             break;
         }
     }
+    // Контрольный вывод пустого массива для слов
+    for (int i = 0; i < WORD_COUNT; ++i)
+    {
+        for (int j = 0; j < word_size[i]; ++j)
+        {
+            if (words[i][j] == 0)
+            {
+                break;
+            }
+            else
+            {
+                std::cout << words[i][j];
+            }
+        }
+        std::cout << std::endl;
+        if (words[i][0] == 0)
+        {
+            break;
+        }
+    }
+    for (int i = 0; i < WORD_COUNT; ++i)
+    {
+        memset(words[i], 0, word_size[i] * sizeof(char));
+        delete [] words[i];
+    }
+    delete [] words;
+    delete [] word_size;
+    delete [] text;
     return 0;
 }
