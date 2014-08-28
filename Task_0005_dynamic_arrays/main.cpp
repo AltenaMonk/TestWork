@@ -83,15 +83,5 @@ int main()
             break;
         }
     }
-
-    for (int i = 0; i < WORD_COUNT; ++i)
-    {
-        if (word_size[i] == 1)
-        {
-        //    break;
-        //}
-            std::cout << "1" << std::endl;
-        }
-    }
     return 0;
 }
