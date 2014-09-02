@@ -111,7 +111,7 @@ int main()
                 {
                 if (j - brick_word_size[i] - brick_char_index == 0)
                 {
-                    int new_brick_size = brick_word_size[i] + 1;
+                    int new_brick_size = brick_word_size[i] * 2 + 1;
                     char * brick_temp = new char[new_brick_size];
                     memset(brick_temp, 0, new_brick_size * sizeof(char));
                     for (int k = 0; k < brick_word_size[i]; ++k)
