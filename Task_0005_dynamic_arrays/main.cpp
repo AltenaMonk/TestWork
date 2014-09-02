@@ -106,21 +106,22 @@ int main()
         {
             // Проверяем, хватает ли выделенной длины соответствуещего кирпичного слова.
             // Если не хватает - удваиваем
-            if (j - brick_word_size[i] - brick_char_index == 0)
-            {
-                int new_brick_size = brick_word_size[i] * 2;
-                char * brick_temp = new char[new_brick_size];
-                memset(brick_temp, 0, new_brick_size * sizeof(char));
-                for (int k = 0; k < brick_word_size[i]; ++k)
+
+            if (words[i][j] == 0 && j > 0)
                 {
-                    brick_temp[k] = brick_words[i][k];
+                if (j - brick_word_size[i] - brick_char_index == 0)
+                {
+                    int new_brick_size = brick_word_size[i] + 1;
+                    char * brick_temp = new char[new_brick_size];
+                    memset(brick_temp, 0, new_brick_size * sizeof(char));
+                    for (int k = 0; k < brick_word_size[i]; ++k)
+                    {
+                        brick_temp[k] = brick_words[i][k];
+                    }
+                    brick_word_size[i] = new_brick_size;
+                    delete [] brick_words[i];
+                    brick_words[i] = brick_temp;
                 }
-                brick_word_size[i] = new_brick_size;
-                delete [] brick_words[i];
-                brick_words[i] = brick_temp;
-            }
-            if (words[i][j] == 0)
-            {
                 brick_char_index = 0;
                 break;
             }
@@ -131,6 +132,19 @@ int main()
                      words[i][j] == 'u' ||
                      words[i][j] == 'y')
             {
+                if (j - brick_word_size[i] - brick_char_index == 0)
+                {
+                    int new_brick_size = brick_word_size[i] * 2 + 3;
+                    char * brick_temp = new char[new_brick_size];
+                    memset(brick_temp, 0, new_brick_size * sizeof(char));
+                    for (int k = 0; k < brick_word_size[i]; ++k)
+                    {
+                        brick_temp[k] = brick_words[i][k];
+                    }
+                    brick_word_size[i] = new_brick_size;
+                    delete [] brick_words[i];
+                    brick_words[i] = brick_temp;
+                }
                 brick_words[i][brick_char_index+0] = words[i][j];
                 brick_words[i][brick_char_index+1] = 'k';
                 brick_words[i][brick_char_index+2] = words[i][j];
@@ -138,6 +152,19 @@ int main()
             }
             else
             {
+                if (j - brick_word_size[i] - brick_char_index == 0)
+                {
+                    int new_brick_size = brick_word_size[i] * 2;
+                    char * brick_temp = new char[new_brick_size];
+                    memset(brick_temp, 0, new_brick_size * sizeof(char));
+                    for (int k = 0; k < brick_word_size[i]; ++k)
+                    {
+                        brick_temp[k] = brick_words[i][k];
+                    }
+                    brick_word_size[i] = new_brick_size;
+                    delete [] brick_words[i];
+                    brick_words[i] = brick_temp;
+                }
                 brick_words[i][brick_char_index] = words[i][j];
                 ++brick_char_index;
             }
