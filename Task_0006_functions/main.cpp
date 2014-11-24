@@ -10,19 +10,18 @@
 /// Это добавляет читабельности и лёгкости запоминания, а то каждый раз думать что вперёд идёт объект или действие.
 /// Ну и такой порядок записи станет более привычен когда будем классы проходить.
 
-/// По сути всё правильно. Для этой функции только малеькие замечания.
+/// По сути всё правильно. Для этой функции только маленькие замечания.
 int string_lenght (char * string)
 {
     int i = 0;
     /// Писать i = 0 в данном месте не обязательно, можно просто for (; string[i] != 0; ++i)
     /// Все 3 поля являются не обязательными.
-    for (i = 0; string[i] != 0; ++i)
+    for (; string[i] != 0; ++i)
     {
         /// Это тоже не надо, спокойно можно писать.
         /// for (; string[i] != 0; ++i)
         /// {
         /// }
-        ;
     }
     return i + 1;
 }
@@ -36,23 +35,24 @@ int string_lenght (char * string)
 //    return i + 1;
 //}
 
-/// По сути всё правильно. Для этой функции только малеькие замечания.
+/// По сути всё правильно. Для этой функции только маленькие замечания.
 int word_counter (char * string)
 {
-    int counter = 0;
+    int count = 1;
     /// Лучше вычислять длинну 1 раз и потом использовать постоянно.
     /// Примерно так:
     /// int size = string_lenght(string);
     /// for (int i = 0; i < size; ++i)
-    for (int i = 0; i < string_lenght(string); ++i)
+    int size = string_lenght(string);
+    for (int i = 0; i < size; ++i)
     {
         /// Зачем проверка на 0ой символ, у тебя длинна и так уже проверяет до 0ого символа.
-        if (string[i] == ' ' || string[i] == 0)
+        if (string[i] == ' ')
         {
-            ++counter;
+            ++count;
         }
     }
-    return counter;
+    return count;
 }
 /// Тут приведены мои варианты написания аналогичных функций с теми же знаниями, что есть у тебя:
 //int word_count(char * string)
@@ -82,20 +82,16 @@ int word_counter (char * string)
 //}
 
 /// По сути всё правильно. Для этой функции только малеькие замечания.
-int print_string (char * string)
+int string_print (char * string)
 {
     /// Лучше вычислять длинну 1 раз и потом использовать постоянно.
     /// Примерно так:
     /// int size = string_lenght(string);
     /// for (int i = 0; i < size; ++i)
-    for (int i = 0; i < string_lenght(string); ++i)
+    int size = string_lenght(string);
+    for (int i = 0; i < size; ++i)
     {
         /// Зачем это, если длинна и так считается до 0 не включительно? Думаю можно условие полностью вырезать, и оставить только std::cout << string[i];
-        if (string[i] == 0)
-        {
-            break;
-        }
-        else
         {
             std::cout << string[i];
         }
@@ -122,7 +118,7 @@ int print_string (char * string)
 /// Ошибка тут есть.
 /// char * new_string передавать нельзя.
 /// Пример, ты извне передал сюда адрес 0x2000 => Переменная new_string = 0x2000, это просто число.
-int resize_string (char * origin_string, char * new_string)
+/*int resize_string (char * origin_string, char * new_string)
 {
     for (int i = 0; string_lenght(new_string) < string_lenght(origin_string); ++i)
     {
@@ -133,16 +129,38 @@ int resize_string (char * origin_string, char * new_string)
         /// Здесь переменная new_string стала равна 0x3000, просто новому числу.
         /// НО!!! Эта переменная после выхода из функции ни где не останется. Эта информация будет потеряна.
         new_string = temp;
-        /// Надо либо в качестве результата возврящать new_string, а в месте приёмки присваивать переменной новый указатель.
+        /// Надо либо в качестве результата возвращать new_string, а в месте приёмки присваивать переменной новый указатель.
         /// Либо принимать указатель на указатель: char ** new_string и менять значение *new_string = temp.
     }
     return 0;
-}
+}*/
 /// А вообще эту функцию лучше реализовывать как-то так:
 /// @brief Выделяет память под строку в указанном количестве. Использует в качестве вспомагательной string_copy.
 /// @param string Исходная строка.
 /// @param new_size Новый размер буфера.
 /// void string_resize(char ** string, int new_size);
+
+void string_resize (char ** string, int size_new)
+{
+    char ** temp = new char[10];
+    memset(temp, 0, 10 * sizeof(char *));
+    for (int i = 0; i < 10; ++i)
+    {
+        temp[i] = new char[size_new];
+        memset(temp[i], 0, size_new * sizeof(char));
+    }
+
+    int * old_size = new int[100];
+    memset(old_size, 0, 100 * sizeof(int));
+    for (int i = 0; i < 10; ++i)
+    {
+        old_size[i] = string_copy(string[i],temp[i]);
+    }
+    for (int i = 0; i < 10; ++i)
+    {
+        for (int k = 0; )
+    }
+}
 
 
 /// Тут есть идейные ошибки.
@@ -151,12 +169,11 @@ int string_copy (char * origin_string, char * copied_string)
     /// Тут идеалогически не хорошо выделять память, это должен сделать тот кто вызывает функцию.
     /// Ты только копируешь.
     /// Может там раньше был ОГРОМНЫЙ буфер(1024*1024*1024), а ты его заменил на что-то маленькое(10*2).
-    resize_string(origin_string, copied_string);
     for (int i = 0; origin_string != 0; ++i)
     {
         copied_string[i] = origin_string[i];
     }
-    return 0;
+    return i;
 }
 /// А вообще эту функцию лучше реализовывать как-то так:
 /// @brief Копирует одну строку в другую, не меняет буферы, так что вызывающая сторона должна обеспечить достаточность памяти.
