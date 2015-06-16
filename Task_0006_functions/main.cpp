@@ -1,88 +1,69 @@
-#include <iostream>
+﻿#include <iostream>
 #include <memory.h>
-#include <cstdio>
+#define STRING_LENGTH 1024
 
-int string_lenght(char * string)
+int string_length (char * string)
 {
-    /// Защита от дурака.
     if (string == NULL)
     {
         return 0;
     }
     int i = 0;
-    for (; string[i] != 0; ++i)
+    for (;string[i] != 0; ++i)
     {
     }
-    /// Возвращать правильнее размер занимаемый полезными данными, а не техническим нулём. return i; a не return i + 1;
     return i;
 }
-
-int string_print(char * string)
+int string_print (char * string)
 {
-    /// Защита от дурака.
     if (string == NULL)
     {
         return 0;
     }
     int i = 0;
-    for (; string[i] != 0; ++i)
+    for (;string[i] != 0; ++i)
     {
         std::cout << string[i];
     }
-    /// Необходимо вернуть количество напечатанных символов. Иначе зачем вообще стоит int в описании функции?
     return i;
 }
 
-int string_copy(char * from, char * to)
+int string_copy (char * from, char * to)
 {
-    /// Защита от дурака.
     if (from == NULL || to == NULL)
     {
         return 0;
     }
     int i = 0;
-    /// Здесь правильнее копировать всё до нулевого символа from[i] != 0, а не до нулевой строкм from != 0, так как иначе это бесконечный цикл.
-    for (; from[i] != 0; ++i)
+    for (;from[i] != 0; ++i)
     {
         to[i] = from[i];
     }
     return i;
 }
 
-/// @brief Выделяет память под строку в указанном количестве. Использует в качестве вспомагательной string_copy.
-/// @param string Исходная строка.
-/// @param new_size Новый размер буфера.
-void string_resize (char ** string, int size_new)
+int string_resize (char ** string, int new_size)
 {
-    /// Если указатель на изменяемую строку равен 0, то выходим ни чего не сделав.
     if (string == NULL)
     {
-        return;
+        return 0;
     }
-
-    /// Выделяем память в указанном количестве под новую строку.
-    char * newString = new char[size_new + 1];
-    memset(newString, 0, size_new + 1);
-
-    /// Копируем старую строку в новую.
-    string_copy(*string, newString);
-
-    /// Если под изменяемую строку была выделена память, то освободим эту память.
-    if (*string != NULL)
+    char * new_string = new char[new_size + 1];
+    memset (new_string, 0, new_size + 1);
+    string_copy( * string, new_string);
+    if (* string != NULL)
     {
-        delete [] *string;
+        delete [] * string;
     }
-
-    /// Начнём хранить по указателю на строку нашу вовую строку.
-    *string = newString;
+    * string = new_string;
+    return string_length(* string);
 }
 
 int word_counter (char * string)
 {
     int count = 1;
-    int size = string_lenght(string);
-    /// Если возвращать размер полезных данных, то правильнее будет i <= size;
-    for (int i = 0; i < size; ++i)
+    int size = string_length(string);
+    for (int i = 0; i <= size; ++i)
     {
         if (string[i] == ' ')
         {
@@ -92,16 +73,56 @@ int word_counter (char * string)
     return count;
 }
 
-/// А вообще эту функцию лучше реализовывать как-то так:
-/// @brief Копирует одну строку в другую, не меняет буферы, так что вызывающая сторона должна обеспечить достаточность памяти.
-/// @param from Исходная строка.
-/// @param to Куда копируем.
-/// @return Количество скопированных символов.
-/// int string_copy(char * from, char * to);
-
-/*int string_bricking (char * string)
+char ** string_to_words (char * string)
 {
-    for (int i = 0; i < string_lenght(string); ++i)
+    if (string == NULL)
+    {
+        return NULL;
+    }
+
+    // Размер строки
+    int string_size = string_length(string);
+
+    // Размер массива слов
+    int words_size = word_counter(string);
+
+    // Выделяем память под массив слов
+    char ** words = new char * [words_size];
+    memset(words, 0, words_size * sizeof(char *));
+
+    // Переменные для перемещения по массиву
+    int word_index = 0, space_index = 0;
+    for (int i = 0; i < string_size; ++i)
+    {
+        if (string[i] == ' ')
+        {
+
+           // Если встретили пробел - отделяем слово, записываем в массив и переходим к следующему
+           words[word_index] = NULL;
+           string_resize(&words[word_index], i - space_index);
+           for (int k = space_index; k < i; ++i)
+           {
+               words[word_index][k] = string[k];
+           }
+           ++word_index;
+           space_index = i;
+        }
+    }
+    return words;
+}
+
+char * string_bricking (char * string)
+{
+    char * result = NULL;
+    if (string == NULL)
+    {
+        return NULL;
+    }
+    int brick_char_index = 0;
+    char * brick_string = NULL;
+    int string_size = string_length(brick_string);
+    string_resize(&brick_string, string_size);
+    for (int i = 0; i < string_size; ++i)
     {
         if (string[i] == 'a' ||
             string[i] == 'e' ||
@@ -110,53 +131,38 @@ int word_counter (char * string)
             string[i] == 'u' ||
             string[i] == 'y')
         {
-            int brick_index = i;
-            char * brick_string = new char[string_lenght(string)];
-            memset(brick_string, 0, string_lenght(brick_string) * sizeof(char));
-            for (int j = 0; j < string_lenght(string); ++j)
+            if (string_size < brick_char_index + 3)
             {
-                brick_string[j] = string[j+1];
+                string_size = string_resize(&brick_string, string_size + 3);
             }
+            brick_string[brick_char_index] = string[i];
+            brick_string[brick_char_index + 1] = 'k';
+            brick_string[brick_char_index + 2] = string[i];
+            brick_char_index = brick_char_index + 3;
+        }
+        else
+        {
+            if (string_size < brick_char_index + 1)
+            {
+                 string_resize(&brick_string, string_size + 1);
+            }
+            brick_string[brick_char_index] = string[i];
+            ++brick_char_index;
         }
     }
-    return 0;
+    return result;
 }
-*/
-
-/// Примерно, с моей точки зрения, должно использование этого выглядеть так:
-///   /// Тут скучно.
-///   char * text = new char[1024];         /// Создали буфер.
-///   memset(text, 0, 1024 * sizeof(char)); /// Обнулили.
-///   gets(text);                           /// Прочитали с клавиатуры.
-///   char * test_string(NULL);             /// Создали новую строку для хранения данных.
-///   /// Пошло интересное.
-///   int size = string_resize(&test_string, string_lenght(text) * 2); /// Выделили под строку данных в 2 раза больше
-///   string_copy(text, test_string);       /// Скопировали данные из одной строки в другую.
 
 int main()
 {
-    char * text = new char[1024];
-    memset(text, 0, 1024 * sizeof(char));
-    std::cout << "Введите строку для кирпичинизции:" << std::endl;
+    std::cout << "Your text: ";
+    char * text = new char[STRING_LENGTH];
+    memset(text, 0, STRING_LENGTH * sizeof(char));
     gets(text);
-    /// Выделять память сдесь нет ни какого смысла, так как в последствии мы её все равно освобождаем.
-    char * test_string = NULL;
-    std::cout << "Длина строки (исходная, тестовая): " << string_lenght(text) << ", " << string_lenght(test_string) << std::endl;
-    std::cout << "Количество слов: " << word_counter(text) << std::endl;
-    std::cout << "Исходная строка: " << std::endl;
-    string_print(text);
-    std::cout << std::endl;
-    /// Здесь мы заботимся о том, что бы для нашёй строки хватило места.
-    string_resize(&test_string, string_lenght(text));
-    string_copy(text, test_string);
-    std::cout << "Скопированная строка:" << std::endl;
-    string_print(test_string);
-    std::cout << std::endl;
-
-    /// А кто буфер освобождать будет?!!!!!!!!!!!!!!
-    /// А кто буфер освобождать будет?!!!!!!!!!!!!!!
-    delete [] test_string;
+    std::cout << "String length: " << string_length(text) << std::endl;
+    std::cout << "String: " << string_print(text) << std::endl;
+    //std::cout << "String to words: " << string_print(string_to_words(text)) << std::endl;
+    std::cout << "Bricked string: " << string_print(string_bricking(text));
     delete [] text;
-
     return 0;
 }
