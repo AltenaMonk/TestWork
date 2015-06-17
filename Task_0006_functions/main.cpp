@@ -25,6 +25,7 @@ int string_print (char * string)
     {
         std::cout << string[i];
     }
+    std::cout << std::endl;
     return i;
 }
 
@@ -63,9 +64,9 @@ int word_counter (char * string)
 {
     int count = 1;
     int size = string_length(string);
-    for (int i = 0; i <= size; ++i)
+    for (int i = 0; i < size; ++i)
     {
-        if (string[i] == ' ')
+        if (string[i] == ' ' || string[i] == 0)
         {
             ++count;
         }
@@ -92,20 +93,20 @@ char ** string_to_words (char * string)
 
     // Переменные для перемещения по массиву
     int word_index = 0, space_index = 0;
-    for (int i = 0; i < string_size; ++i)
+    for (int i = 0; i <= string_size; ++i)
     {
-        if (string[i] == ' ')
+        if (string[i] == ' ' || string[i] == 0)
         {
 
            // Если встретили пробел - отделяем слово, записываем в массив и переходим к следующему
            words[word_index] = NULL;
            string_resize(&words[word_index], i - space_index);
-           for (int k = space_index; k < i; ++i)
+           for (int k = 0; k < i - space_index; ++k)
            {
-               words[word_index][k] = string[k];
+               words[word_index][k] = string[space_index + k];
            }
            ++word_index;
-           space_index = i;
+           space_index = i + 1;
         }
     }
     return words;
@@ -142,7 +143,6 @@ void words_free (char *** string, int count)
 
 char * string_bricking (char * string)
 {
-    char * result = NULL;
     if (string == NULL)
     {
         return NULL;
@@ -150,6 +150,7 @@ char * string_bricking (char * string)
     int brick_char_index = 0;
     char * brick_string = NULL;
     int string_size = string_length(brick_string);
+    int brick_string_size = 0;
     string_resize(&brick_string, string_size);
     for (int i = 0; i < string_size; ++i)
     {
@@ -160,9 +161,9 @@ char * string_bricking (char * string)
             string[i] == 'u' ||
             string[i] == 'y')
         {
-            if (string_size < brick_char_index + 3)
+            if (brick_string_size < brick_char_index + 3)
             {
-                string_size = string_resize(&brick_string, string_size + 3);
+                brick_string_size = string_resize(&brick_string, brick_char_index + 3);
             }
             brick_string[brick_char_index] = string[i];
             brick_string[brick_char_index + 1] = 'k';
@@ -171,15 +172,15 @@ char * string_bricking (char * string)
         }
         else
         {
-            if (string_size < brick_char_index + 1)
+            if (brick_string_size < brick_char_index + 1)
             {
-                 string_resize(&brick_string, string_size + 1);
+                brick_string_size = string_resize(&brick_string, brick_char_index + 1);
             }
             brick_string[brick_char_index] = string[i];
             ++brick_char_index;
         }
     }
-    return result;
+    return brick_string;
 }
 
 
