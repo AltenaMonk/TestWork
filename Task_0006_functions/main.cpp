@@ -134,7 +134,7 @@ void words_free (char *** string, int count)
     {
         if ((* string)[i] != NULL)
         {
-            delete [] * string[i];
+            delete [] (* string)[i];
         }
     }
     delete [] (* string);
