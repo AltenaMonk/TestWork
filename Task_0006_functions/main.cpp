@@ -25,7 +25,7 @@ int string_print (char * string)
     {
         std::cout << string[i];
     }
-    std::cout << std::endl;
+    std::cout << ' ';
     return i;
 }
 
@@ -122,6 +122,7 @@ void words_print(char ** string, int count)
     {
         string_print(string[i]);
     }
+    std::cout << std::endl;
 }
 
 void words_free (char *** string, int count)
@@ -149,7 +150,7 @@ char * string_bricking (char * string)
     }
     int brick_char_index = 0;
     char * brick_string = NULL;
-    int string_size = string_length(brick_string);
+    int string_size = string_length(string);
     int brick_string_size = 0;
     string_resize(&brick_string, string_size);
     for (int i = 0; i < string_size; ++i)
