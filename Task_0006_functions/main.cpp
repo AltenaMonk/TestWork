@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <memory.h>
 #define STRING_LENGTH 1024
 
@@ -111,6 +111,35 @@ char ** string_to_words (char * string)
     return words;
 }
 
+void words_print(char ** string, int count)
+{
+    if (string == NULL)
+    {
+        return;
+    }
+    for (int i = 0; i < count; ++i)
+    {
+        string_print(string[i]);
+    }
+}
+
+void words_free (char *** string, int count)
+{
+    if (string == NULL || * string == NULL)
+    {
+        return;
+    }
+    for (int i = 0; i < count; ++i)
+    {
+        if ((* string)[i] != NULL)
+        {
+            delete [] * string[i];
+        }
+    }
+    delete [] (* string);
+    * string = NULL;
+}
+
 char * string_bricking (char * string)
 {
     char * result = NULL;
@@ -153,16 +182,41 @@ char * string_bricking (char * string)
     return result;
 }
 
+
 int main()
 {
-    std::cout << "Your text: ";
-    char * text = new char[STRING_LENGTH];
-    memset(text, 0, STRING_LENGTH * sizeof(char));
-    gets(text);
-    std::cout << "String length: " << string_length(text) << std::endl;
-    std::cout << "String: " << string_print(text) << std::endl;
-    //std::cout << "String to words: " << string_print(string_to_words(text)) << std::endl;
-    std::cout << "Bricked string: " << string_print(string_bricking(text));
-    delete [] text;
-    return 0;
+   /// Ввод данных
+   std::cout << "Your text: ";
+   char * text = new char[STRING_LENGTH];
+   memset(text, 0, STRING_LENGTH * sizeof(char));
+   gets(text);
+
+
+   /// Обработка данных
+   int words_count = word_counter(text);
+   char ** words = string_to_words(text);
+   char ** bricks = new char * [words_count];
+   memset(bricks, 0, words_count * sizeof(char *));
+   for (int index = 0; index < words_count; ++index)
+   {
+       bricks[index] = string_bricking(words[index]);
+   }
+
+
+   /// Вывод результатов
+   std::cout << "String length: " << string_length(text) << std::endl;
+   std::cout << "String: " << std::endl;
+   string_print(text);
+   std::cout << std::endl;
+   std::cout << "String to words: " << std::endl;
+   words_print(words, words_count);
+   std::cout << "Bricked string: " << std::endl;
+   words_print(bricks, words_count);
+
+
+   /// Освобаждение оесурсов
+   words_free(&bricks, words_count);
+   words_free(&words, words_count);
+   delete [] text;
+   return 0;
 }
