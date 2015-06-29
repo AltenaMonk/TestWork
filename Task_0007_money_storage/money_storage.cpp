@@ -27,30 +27,30 @@ money_value multiply (money_value first, int second)
 
 void print (money_value value)
 {
-    std::cout << value.value / 100 << std::endl;
+    std::cout << value.value << std::endl;
 }
 
 int main(int, char *[])
 {
-    money_value price  = {-75};
+    money_value price  = {75.28};
     money_value balance = {0};
-    money_value error = {6000};
+    money_value error = {6000.75};
     std::cout << "Add: ";
-    add(balance, price);
+    balance = add(balance, price);
     print(balance);
     std::cout << std::endl;
     int hour = 4;
     std::cout << "Multiply by hours: ";
-    multiply(balance, hour);
+    balance = multiply(balance, hour);
     print(balance);
     std::cout << std::endl;
     int days = 20;
     std::cout << "Multiply by days: ";
-    multiply(balance, days);
+    balance = multiply(balance, days);
     print(balance);
     std::cout << std::endl;
     std::cout << "Subtract by error: ";
-    subtract(balance, error);
+    balance = subtract(balance, error);
     print(balance);
     std::cout << std::endl;
     return 0;
