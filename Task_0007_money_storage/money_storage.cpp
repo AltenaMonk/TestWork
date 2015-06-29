@@ -4,12 +4,27 @@
 
 struct money_value
 {
-    int value_sign;
-    int value_int;
-    int value_hund;
+    int value;
 };
 
-void normalize (money_value * value)
+money_value add (money_value first, money_value second)
+{
+    first.value = first.value + second.value;
+    return first;
+}
+
+money_value subtract (money_value first, money_value second)
+{
+    first.value = first.value - second.value;
+    return first;
+}
+
+money_value multiply (money_value first, int second)
+{
+    first.value = first.value * second;
+    return first;
+}
+/*void normalize (money_value * value)
 {
     if (value == NULL)
     {
@@ -24,6 +39,10 @@ void normalize (money_value * value)
     value->value_hund = value->value_hund % 100;
 }
 
+bool less ()
+{
+    
+}
 
 void add (money_value * first, money_value * second)
 {
@@ -31,12 +50,22 @@ void add (money_value * first, money_value * second)
     {
         return;
     }
-    first->value_int = (first->value_sign * first->value_int) + (second->value_sign * second->value_int);
+    int sign = 0;
+    if (first->value_sign == second->value_sign)
+    {
+        sign = first->value_sign;
+    }
+    else
+    {
+
+    }
     first->value_hund = first->value_hund + second->value_hund;
+    first->value_int =  first->value_int + second->value_int;
     if (first->value_int < 0) {
         first->value_int *= -1;
         first->value_sign = -1;
     }
+    first->value_sign = sign;
     normalize(first);
 }
 
@@ -111,4 +140,4 @@ int main(int, char *[])
     print(&balance);
     std::cout << std::endl;
     return 0;
-}
+}*/
