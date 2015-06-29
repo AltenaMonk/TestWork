@@ -5,31 +5,31 @@
 struct money_value
 {
     int value;
-    void print (money_value value)
+    void print ()
     {
-        if (value.value >= 10)
+        if (value >= 10)
         {
-            std::cout << value.value / 100 << "." << value.value % 100 << std::endl;
+            std::cout << value / 100 << "." << value % 100 << std::endl;
         }
-        if ( (value.value > -100) && (value.value < -10))
+        if ( (value > -100) && (value < -10))
         {
-            std::cout << "-" << value.value / 100 << "." <<(-1) * (value.value % 100) << std::endl;
+            std::cout << "-" << value / 100 << "." <<(-1) * (value % 100) << std::endl;
         }
-        if ((value.value > -10) && (value.value < 0))
+        if ((value > -10) && (value < 0))
         {
-            std::cout << "-0.0" << (-1) * (value.value % 100) << std::endl;
+            std::cout << "-0.0" << (-1) * (value % 100) << std::endl;
         }
-        if ((value.value < 10) && (value.value > 0))
+        if ((value < 10) && (value > 0))
         {
-            std::cout << "0.0" << value.value % 100 << std::endl;
+            std::cout << "0.0" << value % 100 << std::endl;
         }
-        if ((value.value >= 0) && (value.value < 10) && (value.value % 10 == 0))
+        if ((value >= 0) && (value < 10) && (value % 10 == 0))
         {
-            std::cout << value.value / 100 << "." << value.value % 100 << "0" << std::endl;
+            std::cout << value / 100 << "." << value % 100 << "0" << std::endl;
         }
-        if (value.value < -100)
+        if (value < -100)
         {
-            std::cout << value.value / 100 << "." << (-1) * (value.value % 100) << std::endl;
+            std::cout << value / 100 << "." << (-1) * (value % 100) << std::endl;
         }
     }
 
@@ -60,21 +60,21 @@ int main(int, char *[])
     money_value error = {6000 * 100};
     std::cout << "Add: ";
     balance = add(balance, price);
-    balance.print(balance);
+    balance.print();
     std::cout << std::endl;
     int hour = 4;
     std::cout << "Multiply by hours: ";
     balance = multiply(balance, hour);
-    balance.print(balance);
+    balance.print();
     std::cout << std::endl;
     int days = 20;
     std::cout << "Multiply by days: ";
     balance = multiply(balance, days);
-    balance.print(balance);
+    balance.print();
     std::cout << std::endl;
     std::cout << "Subtract by error: ";
     balance = subtract(balance, error);
-    balance.print(balance);
+    balance.print();
     /*std::cout << std::endl;
     print({1050 });
     std::cout << std::endl;
