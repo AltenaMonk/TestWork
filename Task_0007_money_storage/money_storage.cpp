@@ -4,8 +4,11 @@
 
 struct money_value
 {
+private:
+
     int value;
 
+public:
     money_value (int _int, int _hund)
     {
         value = _int * 100 + _hund;
