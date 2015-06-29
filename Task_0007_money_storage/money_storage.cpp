@@ -7,8 +7,10 @@ struct money_value
     int value;
     money_value (int _int, int _hund)
     {
+
         value = _int * 100 + _hund;
     }
+
     void print ()
     {
         if (value >= 10)
@@ -37,47 +39,49 @@ struct money_value
         }
     }
 
+    money_value add (money_value first, money_value second)
+    {
+        first.value = first.value + second.value;
+        return first;
+    }
+
+    money_value subtract (money_value first, money_value second)
+    {
+        first.value = first.value - second.value;
+        return first;
+    }
+
+    money_value multiply (money_value first, int second)
+    {
+        first.value = first.value * second;
+        return first;
+    }
+
 };
 
-money_value add (money_value first, money_value second)
-{
-    first.value = first.value + second.value;
-    return first;
-}
 
-money_value subtract (money_value first, money_value second)
-{
-    first.value = first.value - second.value;
-    return first;
-}
-
-money_value multiply (money_value first, int second)
-{
-    first.value = first.value * second;
-    return first;
-}
 
 int main(int, char *[])
 {
-    money_value price(-75, 28);
+    money_value price(-75, -28);
     money_value balance(0, 0);
     money_value error(6000, 0);
     std::cout << "Add: ";
-    balance = add(balance, price);
+    balance.add(balance, price);
     balance.print();
     std::cout << std::endl;
     int hour = 4;
     std::cout << "Multiply by hours: ";
-    balance = multiply(balance, hour);
+    balance.multiply(balance, hour);
     balance.print();
     std::cout << std::endl;
     int days = 20;
     std::cout << "Multiply by days: ";
-    balance = multiply(balance, days);
+    balance.multiply(balance, days);
     balance.print();
     std::cout << std::endl;
     std::cout << "Subtract by error: ";
-    balance = subtract(balance, error);
+    balance.subtract(balance, error);
     balance.print();
     /*std::cout << std::endl;
     print({1050 });
