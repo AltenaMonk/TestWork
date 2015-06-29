@@ -5,6 +5,10 @@
 struct money_value
 {
     int value;
+    money_value (int _int, int _hund)
+    {
+        value = _int * 100 + _hund;
+    }
     void print ()
     {
         if (value >= 10)
