@@ -24,6 +24,12 @@ money_value multiply (money_value first, int second)
     first.value = first.value * second;
     return first;
 }
+
+void print (money_value value)
+{
+    std::cout << value.value / 100 << std::endl;
+}
+
 /*void normalize (money_value * value)
 {
     if (value == NULL)
