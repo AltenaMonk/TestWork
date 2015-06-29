@@ -60,21 +60,21 @@ int main(int, char *[])
     money_value error = {6000 * 100};
     std::cout << "Add: ";
     balance = add(balance, price);
-    money_value.print(balance);
+    balance.print(balance);
     std::cout << std::endl;
     int hour = 4;
     std::cout << "Multiply by hours: ";
     balance = multiply(balance, hour);
-    money_value.print(balance);
+    balance.print(balance);
     std::cout << std::endl;
     int days = 20;
     std::cout << "Multiply by days: ";
     balance = multiply(balance, days);
-    money_value.print(balance);
+    balance.print(balance);
     std::cout << std::endl;
     std::cout << "Subtract by error: ";
     balance = subtract(balance, error);
-    money_value.print(balance);
+    balance.print(balance);
     /*std::cout << std::endl;
     print({1050 });
     std::cout << std::endl;
@@ -105,7 +105,7 @@ int main(int, char *[])
     print({-1015});
     std::cout << std::endl;
     print({-1050});
-    std::cout << std::endl;
+    std::cout << std::endl;*/
     return 0;
 }
 
