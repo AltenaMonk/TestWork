@@ -27,11 +27,27 @@ money_value multiply (money_value first, int second)
 
 void print (money_value value)
 {
-    if (value.value > 0)
+    if (value.value >= 10)
     {
         std::cout << value.value / 100 << "." << value.value % 100 << std::endl;
     }
-    else
+    if ( (value.value > -100) && (value.value < -10))
+    {
+        std::cout << "-" << value.value / 100 << "." <<(-1) * (value.value % 100) << std::endl;
+    }
+    if ((value.value > -10) && (value.value < 0))
+    {
+        std::cout << "-0.0" << (-1) * (value.value % 100) << std::endl;
+    }
+    if ((value.value < 10) && (value.value > 0))
+    {
+        std::cout << "0.0" << value.value % 100 << std::endl;
+    }
+    if ((value.value >= 0) && (value.value < 10) && (value.value % 10 == 0))
+    {
+        std::cout << value.value / 100 << "." << value.value % 100 << "0" << std::endl;
+    }
+    if (value.value < -100)
     {
         std::cout << value.value / 100 << "." << (-1) * (value.value % 100) << std::endl;
     }
@@ -59,6 +75,36 @@ int main(int, char *[])
     std::cout << "Subtract by error: ";
     balance = subtract(balance, error);
     print(balance);
+    std::cout << std::endl;
+    print({1050 });
+    std::cout << std::endl;
+    print({1015 });
+    std::cout << std::endl;
+    print({150  });
+    std::cout << std::endl;
+    print({115  });
+    std::cout << std::endl;
+    print({50   });
+    std::cout << std::endl;
+    print({15   });
+    std::cout << std::endl;
+    print({5    });
+    std::cout << std::endl;
+    print({0    });
+    std::cout << std::endl;
+    print({-5   });
+    std::cout << std::endl;
+    print({-15  });
+    std::cout << std::endl;
+    print({-50  });
+    std::cout << std::endl;
+    print({-115 });
+    std::cout << std::endl;
+    print({-150 });
+    std::cout << std::endl;
+    print({-1015});
+    std::cout << std::endl;
+    print({-1050});
     std::cout << std::endl;
     return 0;
 }
