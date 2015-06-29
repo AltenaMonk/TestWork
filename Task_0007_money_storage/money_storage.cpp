@@ -30,6 +30,32 @@ void print (money_value value)
     std::cout << value.value / 100 << std::endl;
 }
 
+int main(int, char *[])
+{
+    money_value price  = {-75};
+    money_value balance = {0};
+    money_value error = {6000};
+    std::cout << "Add: ";
+    add(balance, price);
+    print(balance);
+    std::cout << std::endl;
+    int hour = 4;
+    std::cout << "Multiply by hours: ";
+    multiply(balance, hour);
+    print(balance);
+    std::cout << std::endl;
+    int days = 20;
+    std::cout << "Multiply by days: ";
+    multiply(balance, days);
+    print(balance);
+    std::cout << std::endl;
+    std::cout << "Subtract by error: ";
+    subtract(balance, error);
+    print(balance);
+    std::cout << std::endl;
+    return 0;
+}
+
 /*void normalize (money_value * value)
 {
     if (value == NULL)
@@ -122,28 +148,4 @@ void print (money_value * value)
 }
 
 
-int main(int, char *[])
-{
-    money_value price  = {-1, 75, 28};
-    money_value balance = {1, 0, 0};
-    money_value error = {1, 6000, 72};
-    std::cout << "Add: ";
-    add(&balance, &price);
-    print(&balance);
-    std::cout << std::endl;
-    int hour = 4;
-    std::cout << "Multiply by hours: ";
-    multiply(&balance, &hour);
-    print(&balance);
-    std::cout << std::endl;
-    int days = 20;
-    std::cout << "Multiply by days: ";
-    multiply(&balance, &days);
-    print(&balance);
-    std::cout << std::endl;
-    std::cout << "Subtract by error: ";
-    substruct(&balance, &error);
-    print(&balance);
-    std::cout << std::endl;
-    return 0;
-}*/
+*/
