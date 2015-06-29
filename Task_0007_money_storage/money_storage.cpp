@@ -59,9 +59,9 @@ money_value multiply (money_value first, int second)
 
 int main(int, char *[])
 {
-    money_value price  = {-75.28 * 100};
-    money_value balance = {0};
-    money_value error = {6000 * 100};
+    money_value price(-75, 28);
+    money_value balance(0, 0);
+    money_value error(6000, 0);
     std::cout << "Add: ";
     balance = add(balance, price);
     balance.print();
