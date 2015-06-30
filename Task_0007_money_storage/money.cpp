@@ -1,28 +1,51 @@
-#include <cstddef>
-#include <money.h>
 #include <iostream>
+#include <money.h>
 
-int main(int, char *[])
+void print ()
 {
-    money_value price(-75, -28);
-    money_value balance(0, 0);
-    money_value error(6000, 0);
-    std::cout << "Add: ";
-    balance = balance.add(price);
-    balance.print();
-    std::cout << std::endl;
-    int hour = 4;
-    std::cout << "Multiply by hours: ";
-    balance = balance.multiply(hour);
-    balance.print();
-    std::cout << std::endl;
-    int days = 20;
-    std::cout << "Multiply by days: ";
-    balance = balance.multiply(days);
-    balance.print();
-    std::cout << std::endl;
-    std::cout << "Subtract by error: ";
-    balance = balance.subtract(error);
-    balance.print();
-    return 0;
+    if (value >= 10)
+    {
+        std::cout << value / 100 << "." << value % 100 << std::endl;
+    }
+    if ( (value > -100) && (value < -10))
+    {
+        std::cout << "-" << value / 100 << "." <<(-1) * (value % 100) << std::endl;
+    }
+    if ((value > -10) && (value < 0))
+    {
+        std::cout << "-0.0" << (-1) * (value % 100) << std::endl;
+    }
+    if ((value < 10) && (value > 0))
+    {
+        std::cout << "0.0" << value % 100 << std::endl;
+    }
+    if ((value >= 0) && (value < 10) && (value % 10 == 0))
+    {
+        std::cout << value / 100 << "." << value % 100 << "0" << std::endl;
+    }
+    if (value < -100)
+    {
+        std::cout << value / 100 << "." << (-1) * (value % 100) << std::endl;
+    }
+}
+
+money_value add (money_value &second)
+{
+    money_value result(value / 100, value % 100);
+    result.value += second.value;
+    return result;
+}
+
+money_value subtract (money_value & second)
+{
+    money_value result(value / 100, value % 100);
+    result.value -= second.value;
+    return result;
+}
+
+money_value multiply (int second)
+{
+    money_value result(value / 100, value % 100);
+    result.value *= second;
+    return result;
 }
