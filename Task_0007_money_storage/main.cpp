@@ -1,6 +1,5 @@
-#include <iostream>
-#include <cstddef>
 #include "money.h"
+#include <iostream>
 
 int main ()
 {
