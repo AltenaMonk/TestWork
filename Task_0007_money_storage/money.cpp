@@ -1,7 +1,7 @@
 #include <iostream>
 #include <money.h>
 
-void print ()
+money_value::print()
 {
     if (value >= 10)
     {
@@ -29,7 +29,7 @@ void print ()
     }
 }
 
-money_value (int _int, int _hund)
+money_value::money_value(int _int, int _hund)
 {
     value = _int * 100 + _hund;
 }
