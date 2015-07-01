@@ -44,6 +44,13 @@ void money_value::print() const
     }
 }
 
+money_value & money_value::operator + (money_value const &second) const
+{
+    money_value result(*this);
+    result.value += second.value;
+    return result;
+}
+
 money_value money_value::subtract(money_value const &second) const
 {
     money_value result(*this);
