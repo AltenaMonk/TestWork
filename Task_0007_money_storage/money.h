@@ -1,4 +1,3 @@
-#include <iostream>
 struct money_value
 {
 private:
