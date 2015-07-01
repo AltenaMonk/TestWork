@@ -11,6 +11,11 @@ money_value::money_value(money_value const &other)
     value = other.value;
 }
 
+money_value::money_value()
+{
+    value = 0;
+}
+
 void money_value::print() const
 {
     if (value >= 10)
@@ -41,21 +46,21 @@ void money_value::print() const
 
 money_value money_value::add(money_value const &second) const
 {
-    money_value result(value / 100, value % 100);
+    money_value result(*this);
     result.value += second.value;
     return result;
 }
 
 money_value money_value::subtract(money_value const &second) const
 {
-    money_value result(value / 100, value % 100);
+    money_value result(*this);
     result.value -= second.value;
     return result;
 }
 
 money_value money_value::multiply (int second) const
 {
-    money_value result(value / 100, value % 100);
+    money_value result(*this);
     result.value *= second;
     return result;
 }
