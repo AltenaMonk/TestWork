@@ -1,5 +1,5 @@
-#include "money.h"
 #include <iostream>
+#include "money.h"
 
 int main ()
 {
