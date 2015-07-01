@@ -1,5 +1,5 @@
-#include <iostream>
 #include "money.h"
+#include <iostream>
 
 void money_value::print()
 {
