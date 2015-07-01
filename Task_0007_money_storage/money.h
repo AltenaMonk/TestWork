@@ -8,7 +8,15 @@ public:
     money_value ();
     money_value &operator = (money_value const &other);
     money_value &operator += (money_value const &other);
-    money_value &operator + (money_value const &x) const;
+    money_value &operator -= (money_value const &x);
+    money_value &operator *= (int const &x);
+    money_value &operator /= (int const &x);
+    money_value &operator %= (int const &x);
+    money_value &operator + (money_value const &x);
+    money_value &operator - (money_value const &x);
+    money_value &operator * (int const &x);
+    money_value &operator / (int const &x);
+    money_value &operator % (int const &x);
     void print() const;
     money_value subtract(money_value const &x) const;
     money_value multiply(int mod) const;

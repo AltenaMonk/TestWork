@@ -13,15 +13,15 @@ int main ()
     std::cout << "Add: ";
     balance.print();
     std::cout << std::endl;
-    balance = balance.multiply(hours);
+    balance *= hours;
     std::cout << "Multiple by hour: ";
     balance.print();
     std::cout << std::endl;
-    balance = balance.multiply(days);
+    balance *= days;
     std::cout << "Multiple by hour: ";
     balance.print();
     std::cout << std::endl;
-    balance = balance.subtract(error);
+    balance -= error;
     std::cout << "adding error: ";
     balance.print();
     std::cout << std::endl;
