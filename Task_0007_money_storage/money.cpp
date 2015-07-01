@@ -1,7 +1,7 @@
 #include "money.h"
 #include <iostream>
 
-money_value::money_value(int const _int, const int _hund)
+money_value::money_value(int _int, int _hund)
 {
     value = _int * 100 + _hund;
 }
@@ -34,21 +34,21 @@ void money_value::print() const
     }
 }
 
-money_value const money_value::add(money_value const &second)
+money_value const money_value::add(money_value &second)
 {
     money_value result(value / 100, value % 100);
     result.value += second.value;
     return result;
 }
 
-money_value const money_value::subtract(money_value const &second)
+money_value const money_value::subtract(money_value &second)
 {
     money_value result(value / 100, value % 100);
     result.value -= second.value;
     return result;
 }
 
-money_value const money_value::multiply (int const second)
+money_value const money_value::multiply (int second)
 {
     money_value result(value / 100, value % 100);
     result.value *= second;
