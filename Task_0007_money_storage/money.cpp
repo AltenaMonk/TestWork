@@ -80,35 +80,35 @@ money_value &money_value::operator %= (int const &other)
     return *this;
 }
 
-money_value & money_value::operator + (money_value const &other)
+money_value money_value::operator + (money_value const &other)
 {
     money_value result(*this);
     result += other;
     return result;
 }
 
-money_value &money_value::operator - (money_value const &other)
+money_value money_value::operator - (money_value const &other)
 {
     money_value result(*this);
     result -= other;
     return result;
 }
 
-money_value &money_value::operator * (int const &other)
+money_value money_value::operator * (int const &other)
 {
     money_value result(*this);
     result *= other;
     return result;
 }
 
-money_value &money_value::operator / (int const &other)
+money_value money_value::operator / (int const &other)
 {
     money_value result(*this);
     result /= other;
     return result;
 }
 
-money_value &money_value::operator % (int const &other)
+money_value money_value::operator % (const int &other)
 {
     money_value result(*this);
     result %= other;
