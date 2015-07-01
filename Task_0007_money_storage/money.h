@@ -5,9 +5,9 @@ public:
 
     money_value (int _int, int _hund);
     void print() const;
-    money_value const add (money_value &x);
-    money_value const subtract(money_value &x);
-    money_value const multiply(int mod);
+    money_value add (money_value const &x) const;
+    money_value subtract(money_value const &x) const;
+    money_value multiply(int mod) const;
 
 private:
 

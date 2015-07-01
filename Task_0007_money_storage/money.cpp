@@ -34,21 +34,21 @@ void money_value::print() const
     }
 }
 
-money_value const money_value::add(money_value &second)
+money_value money_value::add(money_value const &second) const
 {
     money_value result(value / 100, value % 100);
     result.value += second.value;
     return result;
 }
 
-money_value const money_value::subtract(money_value &second)
+money_value money_value::subtract(money_value const &second) const
 {
     money_value result(value / 100, value % 100);
     result.value -= second.value;
     return result;
 }
 
-money_value const money_value::multiply (int second)
+money_value money_value::multiply (int second) const
 {
     money_value result(value / 100, value % 100);
     result.value *= second;
