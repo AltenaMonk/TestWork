@@ -11,9 +11,5 @@ public:
     money_value add (money_value & x);
     money_value subtract(money_value & x);
     money_value multiply(int mod);
-    money_value (int _int, int _hund)
-    {
-        value = _int * 100 + _hund;
-    }
-
+    money_value (int _int, int _hund);
 };
