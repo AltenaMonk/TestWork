@@ -6,7 +6,7 @@ money_value::money_value(int _int, int _hund)
     value = _int * 100 + _hund;
 }
 
-money_value::copy(money_value const &other)
+money_value::money_value(money_value const &other)
 {
     value = other.value;
 }
@@ -57,12 +57,5 @@ money_value money_value::multiply (int second) const
 {
     money_value result(value / 100, value % 100);
     result.value *= second;
-    return result;
-}
-
-money_value money_value::copy(money_value const &newValue) const
-{
-    money_value result(value / 100, value % 100);
-    newValue.value = newValue.value;
     return result;
 }
