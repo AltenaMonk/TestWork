@@ -1,7 +1,7 @@
 #include <iostream>
 #include <money.h>
 
-money_value::print()
+void money_value::print()
 {
     if (value >= 10)
     {
