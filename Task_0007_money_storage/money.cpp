@@ -1,6 +1,11 @@
 #include "money.h"
 #include <iostream>
 
+money_value::money_value(int _int, int _hund)
+{
+    value = _int * 100 + _hund;
+}
+
 void money_value::print()
 {
     if (value >= 10)
@@ -27,11 +32,6 @@ void money_value::print()
     {
         std::cout << value / 100 << "." << (-1) * (value % 100) << std::endl;
     }
-}
-
-money_value::money_value(int _int, int _hund)
-{
-    value = _int * 100 + _hund;
 }
 
 money_value money_value::add(money_value &second)
