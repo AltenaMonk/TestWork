@@ -9,7 +9,7 @@ int main ()
 
     int hours = 4;
     int days = 20;
-    balance = balance.add(price);
+    balance += price;
     std::cout << "Add: ";
     balance.print();
     std::cout << std::endl;
