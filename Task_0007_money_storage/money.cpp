@@ -64,3 +64,9 @@ money_value money_value::multiply (int second) const
     result.value *= second;
     return result;
 }
+
+money_value & operator= (money_value const &other)
+{
+    value = other.value;
+    return *this;
+}
