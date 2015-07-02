@@ -94,21 +94,21 @@ money_value money_value::operator - (money_value const &other) const
     return result;
 }
 
-money_value money_value::operator * (int &other) const
+money_value money_value::operator * (int other) const
 {
     money_value result(*this);
     result *= other;
     return result;
 }
 
-money_value money_value::operator / (int &other) const
+money_value money_value::operator / (int other) const
 {
     money_value result(*this);
     result /= other;
     return result;
 }
 
-money_value money_value::operator % (int &other) const
+money_value money_value::operator % (int other) const
 {
     money_value result(*this);
     result %= other;
