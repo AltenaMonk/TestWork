@@ -9,9 +9,9 @@ public:
     money_value &operator = (money_value const &other);
     money_value &operator += (money_value const &other);
     money_value &operator -= (money_value const &x);
-    money_value &operator *= (int const &x);
-    money_value &operator /= (int const &x);
-    money_value &operator %= (int const &x);
+    money_value &operator *= (int x);
+    money_value &operator /= (int x);
+    money_value &operator %= (int x);
     money_value operator + (money_value const &x) const;
     money_value operator - (money_value const &x) const;
     money_value operator * (int x) const;

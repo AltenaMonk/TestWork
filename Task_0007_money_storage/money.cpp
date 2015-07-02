@@ -62,19 +62,19 @@ money_value &money_value::operator -= (money_value const &other)
     return *this;
 }
 
-money_value &money_value::operator *= (int const &other)
+money_value &money_value::operator *= (int other)
 {
     value *= other;
     return *this;
 }
 
-money_value &money_value::operator /= (int const &other)
+money_value &money_value::operator /= (int other)
 {
     value /= other;
     return *this;
 }
 
-money_value &money_value::operator %= (int const &other)
+money_value &money_value::operator %= (int other)
 {
     value %= other;
     return *this;
