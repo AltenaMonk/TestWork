@@ -24,5 +24,4 @@ public:
 
 private:
     long m_value;
-
 };

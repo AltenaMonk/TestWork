@@ -17,74 +17,80 @@ MoneyValue::MoneyValue()
     m_value = 0;
 }
 
+/// Destruct
+MoneyValue::~MoneyValue()
+{
+}
+
+
 /// Operators
-MoneyValue & MoneyValue::operator = (MoneyValue const &other)
+MoneyValue & MoneyValue::operator=(MoneyValue const &other)
 {
     m_value = other.m_value;
-    return *this;
+    return * this;
 }
 
-MoneyValue &MoneyValue::operator += (MoneyValue const &other)
+MoneyValue &MoneyValue::operator+=(MoneyValue const &other)
 {
     m_value += other.m_value;
-    return *this;
+    return * this;
 }
 
-MoneyValue &MoneyValue::operator -= (MoneyValue const &other)
+MoneyValue &MoneyValue::operator-=(MoneyValue const &other)
 {
     m_value -= other.m_value;
-    return *this;
+    return * this;
 }
 
-MoneyValue &MoneyValue::operator *= (long other)
+MoneyValue &MoneyValue::operator*=(long other)
 {
     m_value *= other;
-    return *this;
+    return * this;
 }
 
-MoneyValue &MoneyValue::operator /= (long other)
+MoneyValue &MoneyValue::operator/=(long other)
 {
     m_value /= other;
-    return *this;
+    return * this;
 }
 
-MoneyValue &MoneyValue::operator %= (long other)
+MoneyValue &MoneyValue::operator%=(long other)
 {
     m_value %= other;
-    return *this;
+    return * this;
 }
 
-MoneyValue MoneyValue::operator + (MoneyValue const &other) const
+MoneyValue MoneyValue::operator+(MoneyValue const &other) const
 {
-    MoneyValue result(*this);
+    MoneyValue result(* this);
     result += other;
     return result;
 }
 
-MoneyValue MoneyValue::operator - (MoneyValue const &other) const
+MoneyValue MoneyValue::operator-(MoneyValue const &other) const
 {
-    MoneyValue result(*this);
+    MoneyValue result(* this);
     result -= other;
     return result;
 }
 
-MoneyValue MoneyValue::operator * (long other) const
+MoneyValue MoneyValue::operator*(long other) const
 {
-    MoneyValue result(*this);
+    MoneyValue result(* this);
     result *= other;
     return result;
 }
 
-MoneyValue MoneyValue::operator / (long other) const
+MoneyValue MoneyValue::operator/(long other) const
 {
-    MoneyValue result(*this);
+    MoneyValue result(* this);
     result /= other;
     return result;
 }
 
-MoneyValue MoneyValue::operator % (long other) const
+MoneyValue MoneyValue::operator%(long other) const
 {
-    MoneyValue result(*this);
+    MoneyValue result(* this);
     result %= other;
     return result;
 }
