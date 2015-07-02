@@ -1,7 +1,7 @@
 #include "money.h"
 #include <iostream>
 
-money_value::money_value(int _int, int _hund)
+money_value::money_value(long _int, long _hund)
 {
     value = _int * 100 + _hund;
 }
@@ -62,19 +62,19 @@ money_value &money_value::operator -= (money_value const &other)
     return *this;
 }
 
-money_value &money_value::operator *= (int other)
+money_value &money_value::operator *= (long other)
 {
     value *= other;
     return *this;
 }
 
-money_value &money_value::operator /= (int other)
+money_value &money_value::operator /= (long other)
 {
     value /= other;
     return *this;
 }
 
-money_value &money_value::operator %= (int other)
+money_value &money_value::operator %= (long other)
 {
     value %= other;
     return *this;
@@ -94,21 +94,21 @@ money_value money_value::operator - (money_value const &other) const
     return result;
 }
 
-money_value money_value::operator * (int other) const
+money_value money_value::operator * (long other) const
 {
     money_value result(*this);
     result *= other;
     return result;
 }
 
-money_value money_value::operator / (int other) const
+money_value money_value::operator / (long other) const
 {
     money_value result(*this);
     result /= other;
     return result;
 }
 
-money_value money_value::operator % (int other) const
+money_value money_value::operator % (long other) const
 {
     money_value result(*this);
     result %= other;
