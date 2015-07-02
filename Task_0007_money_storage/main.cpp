@@ -1,29 +1,29 @@
 #include <iostream>
-#include "money.h"
+#include "MoneyValue.h"
 
 int main ()
 {
-    money_value price(-75, -28);
-    money_value balance(0, 0);
-    money_value error(6000, 0);
+    MoneyValue price(-75, -28);
+    MoneyValue balance(0, 0);
+    MoneyValue error(6000, 0);
 
     int hours = 4;
     int days = 20;
     balance = balance + price;
     std::cout << "Add: ";
-    balance.print();
+    balance.Print();
     std::cout << std::endl;
     balance *= hours;
     std::cout << "Multiple by hour: ";
-    balance.print();
+    balance.Print();
     std::cout << std::endl;
     balance *= days;
     std::cout << "Multiple by hour: ";
-    balance.print();
+    balance.Print();
     std::cout << std::endl;
     balance -= error;
     std::cout << "adding error: ";
-    balance.print();
+    balance.Print();
     std::cout << std::endl;
     return 0;
 }
