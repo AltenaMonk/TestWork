@@ -1,3 +1,6 @@
+#ifndef MONEYVALUE_H_INCLUDE_GUARD
+#define MONEYVALUE_H_INCLUDE_GUARD
+
 struct MoneyValue
 {
 public:
@@ -5,6 +8,9 @@ public:
     MoneyValue (long m_int, long m_hund);
     MoneyValue (MoneyValue const &other);
     MoneyValue ();
+
+    /// Destruct
+    ~MoneyValue();
 
     /// Operstors
     MoneyValue & operator=(MoneyValue const & other);
@@ -25,3 +31,5 @@ public:
 private:
     long m_value;
 };
+
+#endif//MONEYVALUE_H_INCLUDE_GUARD
