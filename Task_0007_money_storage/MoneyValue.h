@@ -4,6 +4,8 @@
 
 struct MoneyValue
 {
+    friend std::ostream & operator<<(std::ostream & out, MoneyValue const & x);
+    friend std::istream & operator>>(std::istream & in, MoneyValue & x);
 public:
     /// Constructors
     MoneyValue (long m_int, long m_hund);
@@ -25,8 +27,6 @@ public:
     MoneyValue operator*(long x) const;
     MoneyValue operator/(long x) const;
     MoneyValue operator%(long x) const;
-    friend std::ostream & operator<<(std::ostream & out, MoneyValue const & x);
-    friend std::istream & operator>>(std::istream & in, MoneyValue & x);
 
     /// Functions
     void Print() const;
