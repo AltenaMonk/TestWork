@@ -99,28 +99,29 @@ std::ostream & operator<<(std::ostream & out, MoneyValue const & x)
 {
     if (x.m_value >= 10)
     {
-        out << x.m_value / 100 << "." << x.m_value % 100 << std::endl;
+        out << x.m_value / 100 << "." << x.m_value % 100;
     }
     if ( (x.m_value > -100) && (x.m_value < -10))
     {
-        out << "-" << x.m_value / 100 << "." <<(-1) * (x.m_value % 100) << std::endl;
+        out << "-" << x.m_value / 100 << "." <<(-1) * (x.m_value % 100);
     }
     if ((x.m_value > -10) && (x.m_value < 0))
     {
-        out << "-0.0" << (-1) * (x.m_value % 100) << std::endl;
+        out << "-0.0" << (-1) * (x.m_value % 100);
     }
     if ((x.m_value < 10) && (x.m_value > 0))
     {
-        out << "0.0" << x.m_value % 100 << std::endl;
+        out << "0.0" << x.m_value % 100;
     }
     if ((x.m_value >= 0) && (x.m_value < 10) && (x.m_value % 10 == 0))
     {
-        out << x.m_value / 100 << "." << x.m_value % 100 << "0" << std::endl;
+        out << x.m_value / 100 << "." << x.m_value % 100 << "0";
     }
     if (x.m_value < -100)
     {
-        out << x.m_value / 100 << "." << (-1) * (x.m_value % 100) << std::endl;
+        out << x.m_value / 100 << "." << (-1) * (x.m_value % 100);
     }
+
 }
 
 MoneyValue MoneyValue::operator>>(std::istream & in, MoneyValue & x)
