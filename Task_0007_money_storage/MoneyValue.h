@@ -1,5 +1,6 @@
 #ifndef MONEYVALUE_H_INCLUDE_GUARD
 #define MONEYVALUE_H_INCLUDE_GUARD
+#include <iostream>
 
 struct MoneyValue
 {
@@ -13,8 +14,8 @@ public:
     ~MoneyValue();
 
     /// Operstors
-    MoneyValue & operator=(MoneyValue const & other);
-    MoneyValue & operator+=(MoneyValue const & other);
+    MoneyValue & operator=(MoneyValue const & x);
+    MoneyValue & operator+=(MoneyValue const & x);
     MoneyValue & operator-=(MoneyValue const & x);
     MoneyValue & operator*=(long x);
     MoneyValue & operator/=(long x);
@@ -24,6 +25,8 @@ public:
     MoneyValue operator*(long x) const;
     MoneyValue operator/(long x) const;
     MoneyValue operator%(long x) const;
+    friend std::ostream & operator<<(std::ostream & out, MoneyValue const & x);
+    friend std::istream & operator>>(std::istream & in, MoneyValue & x);
 
     /// Functions
     void Print() const;
