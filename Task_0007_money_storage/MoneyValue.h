@@ -1,6 +1,10 @@
 #ifndef MONEYVALUE_H_INCLUDE_GUARD
 #define MONEYVALUE_H_INCLUDE_GUARD
+
 #include <iostream>
+
+namespace Library
+{
 
 struct MoneyValue
 {
@@ -30,6 +34,7 @@ public:
 
     /// Functions
     void Print() const;
+    Library::String ToString() const;
 
 private:
     long m_value;
@@ -37,4 +42,5 @@ private:
 std::ostream & operator<<(std::ostream & out, MoneyValue const & x);
 std::istream & operator>>(std::istream & in, MoneyValue & x);
 
+}
 #endif//MONEYVALUE_H_INCLUDE_GUARD

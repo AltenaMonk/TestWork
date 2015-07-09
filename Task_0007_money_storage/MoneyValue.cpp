@@ -1,6 +1,8 @@
 #include "MoneyValue.h"
 #include <iostream>
 
+namespace Library
+{
 /// Constructors
 MoneyValue::MoneyValue(long m_int, long m_hund)
 {
@@ -124,9 +126,43 @@ std::ostream & operator<<(std::ostream & out, MoneyValue const & x)
 
 }
 
-MoneyValue MoneyValue::operator>>(std::istream & in, MoneyValue & x)
+std::istream & operator>>(std::istream & in, MoneyValue & x)
 {
-
+    x.m_value = 0;
+    char c = 0;
+    in.get(c);
+    if (с == '0')
+    {
+    }
+    else if (c >= '1' && c <= '9')
+    {
+        do
+        {
+            x.m_value = x.m_value * 10 + (c - '0');
+            in.get(c);
+        }
+        while (с >= '0' && c <= '9');
+        in.unget(c);
+    }
+    if (c == '.')
+    {
+        in.get(c);
+        if (с >= '0' && c <= '9')
+        {
+            x.m_value = x.m_value * 10 + (c - '0');
+            in.get(c);
+        }
+        if (с >= '0' && c <= '9')
+        {
+            x.m_value = x.m_value * 10 + (c - '0');
+        }
+        x.m_value = x.m_value / 100;
+    }
+    else
+    {
+        in.unget(c);
+    }
+    return in;
 }
 
 /// Functions
@@ -156,4 +192,5 @@ void MoneyValue::Print() const
     {
         std::cout << m_value / 100 << "." << (-1) * (m_value % 100) << std::endl;
     }
+}
 }
