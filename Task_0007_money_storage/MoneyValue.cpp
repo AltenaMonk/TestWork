@@ -134,22 +134,9 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     bool signum = false;
 
     /// Проверка отрицательности числа
-    if (c == '-')
+    if (c == '-' || c == '+')
     {
-        signum = true;
-        c = in.get();
-        if (c <= '0' || c >= '9')
-        {
-            in.unget();
-            in.unget();
-            return in;
-        }
-    }
-    in.unget();
-    c = in.get();
-
-    if (c == '+')
-    {
+        signum = c == '-';
         c = in.get();
         if (c <= '0' || c >= '9')
         {
