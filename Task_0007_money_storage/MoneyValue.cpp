@@ -130,7 +130,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
 {
     x.m_value = 0;
     char c = 0;
-    in.get(c);
+    c = in.get();
     if (с == '0')
     {
     }
@@ -139,29 +139,29 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
         do
         {
             x.m_value = x.m_value * 10 + (c - '0');
-            in.get(c);
+            c = in.get();
         }
         while (с >= '0' && c <= '9');
-        in.unget(c);
+        in.unget();
     }
     if (c == '.')
     {
-        in.get(c);
+        c = in.get();
         if (с >= '0' && c <= '9')
         {
             x.m_value = x.m_value * 10 + (c - '0');
-            in.get(c);
+            c = in.get();
         }
         if (с >= '0' && c <= '9')
         {
             x.m_value = x.m_value * 10 + (c - '0');
-            in.get(c);
+            c = in.get();
         }
         x.m_value = x.m_value / 100;
     }
     else
     {
-        in.unget(c);
+        in.unget();
     }
     return in;
 }
