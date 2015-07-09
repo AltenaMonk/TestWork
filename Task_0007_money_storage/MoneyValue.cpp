@@ -163,12 +163,12 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
             x.m_value += c - '0';
             c = in.get();
         }
+        else
+        {
+            in.unget();
+        }
     }
     in.unget();
-    else
-    {
-        in.unget();
-    }
     return in;
 }
 
