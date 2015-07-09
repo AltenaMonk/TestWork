@@ -135,7 +135,10 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     if (c == '-')
     {
         signum = true;
+        c = in.get();
     }
+    in.unget();
+    c = in.get();
     if (с == '0')
     {
     }
