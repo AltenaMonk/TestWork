@@ -131,12 +131,12 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     x.m_value = 0;
     char c = 0;
     c = in.get();
-    bool signum = false;
+    bool isMinus = false;
 
-    /// Проверка отрицательности числа
+    /// Проверка знака числа
     if (c == '-' || c == '+')
     {
-        signum = c == '-';
+        isMinus = c == '-';
         c = in.get();
         if (c <= '0' || c >= '9')
         {
@@ -184,7 +184,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     in.unget();
 
     /// Применяем признак отрицательности числа к конецному результату
-    if (signum == true)
+    if (isMinus == true)
     {
         x.m_value = - x.m_value;
     }
