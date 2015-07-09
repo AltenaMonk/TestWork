@@ -144,7 +144,12 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
         while (с >= '0' && c <= '9');
         in.unget();
     }
+    else
+    {
+        in.unget();
+    }
     x.m_value = x.m_value * 100;
+    c = in.get();
     if (c == '.')
     {
         c = in.get();
