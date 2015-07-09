@@ -164,6 +164,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
             c = in.get();
         }
     }
+    in.unget();
     else
     {
         in.unget();
