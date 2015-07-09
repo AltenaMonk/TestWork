@@ -148,6 +148,19 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     in.unget();
     c = in.get();
 
+    if (c == '+')
+    {
+        c = in.get();
+        if (c <= '0' || c >= '9')
+        {
+            in.unget();
+            in.unget();
+            return in;
+        }
+    }
+    in.unget();
+    c = in.get();
+
     /// Получаем и записываем цифры, из которых состоит получаемое число
     /// Проверка, не начинается ли число с 0
     if (с == '0')
