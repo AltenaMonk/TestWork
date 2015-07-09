@@ -145,8 +145,8 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
             return in;
         }
     }
-    in.unget();
-    c = in.get();
+    //in.unget();
+    //c = in.get();
 
     /// Получаем и записываем цифры, из которых состоит получаемое число
     /// Проверка, не начинается ли число с 0
@@ -166,9 +166,9 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     }
     else
     {
-        in.unget();
     }
     x.m_value = x.m_value * 100;
+    //in.unget();
     c = in.get();
 
     /// Получаем дробную часть числа (если она есть)
@@ -187,7 +187,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
         }
         else
         {
-            in.unget();
+            //in.unget();
         }
     }
     in.unget();
