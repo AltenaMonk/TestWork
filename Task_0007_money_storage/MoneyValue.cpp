@@ -155,6 +155,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
         if (с >= '0' && c <= '9')
         {
             x.m_value = x.m_value * 10 + (c - '0');
+            in.get(c);
         }
         x.m_value = x.m_value / 100;
     }
