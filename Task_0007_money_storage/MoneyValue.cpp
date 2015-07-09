@@ -131,6 +131,11 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     x.m_value = 0;
     char c = 0;
     c = in.get();
+    bool signum = false;
+    if (c == '-')
+    {
+        signum = true;
+    }
     if (с == '0')
     {
     }
@@ -169,6 +174,10 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
         }
     }
     in.unget();
+    if (signum == true)
+    {
+        x.m_value = - x.m_value;
+    }
     return in;
 }
 
