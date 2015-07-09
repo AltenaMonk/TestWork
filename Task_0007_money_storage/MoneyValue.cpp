@@ -152,24 +152,25 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     /// Проверка, не начинается ли число с 0
     if (с == '0')
     {
-    }
-
-    else if (c >= '1' && c <= '9')
-    {
-        do
-        {
-            x.m_value = x.m_value * 10 + (c - '0');
-            c = in.get();
-        }
-        while (с >= '0' && c <= '9');
-        in.unget();
+        c = in.get();
     }
     else
     {
+        if (c >= '1' && c <= '9')
+        {
+            do
+            {
+                x.m_value = x.m_value * 10 + (c - '0');
+                c = in.get();
+            }
+            while (с >= '0' && c <= '9');
+        }
+        else
+        {
+        }
     }
+    in.unget();
     x.m_value = x.m_value * 100;
-    //in.unget();
-    c = in.get();
 
     /// Получаем дробную часть числа (если она есть)
     if (c == '.')
@@ -187,7 +188,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
         }
         else
         {
-            //in.unget();
+            in.unget();
         }
     }
     in.unget();
