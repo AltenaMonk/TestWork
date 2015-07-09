@@ -145,8 +145,6 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
             return in;
         }
     }
-    in.unget();
-    c = in.get();
 
     /// Получаем и записываем цифры, из которых состоит получаемое число
     /// Проверка, не начинается ли число с 0
@@ -162,10 +160,6 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
             c = in.get();
         }
         while (с >= '0' && c <= '9');
-        in.unget();
-    }
-    else
-    {
         in.unget();
     }
     x.m_value = x.m_value * 100;
@@ -184,10 +178,6 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
         {
             x.m_value += c - '0';
             c = in.get();
-        }
-        else
-        {
-            in.unget();
         }
     }
     in.unget();
