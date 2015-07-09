@@ -132,6 +132,8 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     char c = 0;
     c = in.get();
     bool signum = false;
+
+    /// Проверка отрицательности числа
     if (c == '-')
     {
         signum = true;
@@ -139,9 +141,13 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     }
     in.unget();
     c = in.get();
+
+    /// Проверка, не начинается ли число с 0
     if (с == '0')
     {
     }
+
+    /// Получаем и записываем цифры, из которых состоит получаемое число
     else if (c >= '1' && c <= '9')
     {
         do
@@ -158,6 +164,8 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     }
     x.m_value = x.m_value * 100;
     c = in.get();
+
+    /// Получаем дробную часть числа (если она есть)
     if (c == '.')
     {
         c = in.get();
@@ -177,10 +185,14 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
         }
     }
     in.unget();
+
+    /// Применяем признак отрицательности числа к конецному результату
     if (signum == true)
     {
         x.m_value = - x.m_value;
     }
+
+    /// Возвращаем поток
     return in;
 }
 
