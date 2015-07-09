@@ -171,7 +171,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     }
     x.m_value = x.m_value * 100;
     in.unget();
-    in.get();
+    c = in.get();
 
     /// Получаем дробную часть числа (если она есть)
     if (c == '.')
