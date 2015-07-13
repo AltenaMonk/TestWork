@@ -1,8 +1,7 @@
 #include "MoneyValue.h"
 #include <iostream>
+#include <String.h>
 
-namespace Library
-{
 /// Constructors
 MoneyValue::MoneyValue(long m_int, long m_hund)
 {
@@ -148,7 +147,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
 
     /// Получаем и записываем цифры, из которых состоит получаемое число
     /// Проверка, не начинается ли число с 0
-    if (с == '0')
+    if (c == '0')
     {
         c = in.get();
     }
@@ -161,7 +160,7 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
                 x.m_value = x.m_value * 10 + (c - '0');
                 c = in.get();
             }
-            while (с >= '0' && c <= '9');
+            while (c >= '0' && c <= '9');
         }
     }
     x.m_value = x.m_value * 100;
@@ -170,12 +169,12 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
     if (c == '.')
     {
         c = in.get();
-        if (с >= '0' && c <= '9')
+        if (c >= '0' && c <= '9')
         {
             x.m_value += 10 * (c - '0');
             c = in.get();
         }
-        if (с >= '0' && c <= '9')
+        if (c >= '0' && c <= '9')
         {
             x.m_value += c - '0';
             c = in.get();
@@ -191,6 +190,11 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
 
     /// Возвращаем поток
     return in;
+}
+
+Library::String MoneyValue::ToString() const
+{
+
 }
 
 /// Functions
@@ -220,5 +224,4 @@ void MoneyValue::Print() const
     {
         std::cout << m_value / 100 << "." << (-1) * (m_value % 100) << std::endl;
     }
-}
 }

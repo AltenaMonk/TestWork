@@ -2,9 +2,7 @@
 #define MONEYVALUE_H_INCLUDE_GUARD
 
 #include <iostream>
-
-namespace Library
-{
+#include <String.h>
 
 struct MoneyValue
 {
@@ -33,8 +31,8 @@ public:
     MoneyValue operator%(long x) const;
 
     /// Functions
+    Library::String ToString () const;
     void Print() const;
-    Library::String ToString() const;
 
 private:
     long m_value;
@@ -42,5 +40,4 @@ private:
 std::ostream & operator<<(std::ostream & out, MoneyValue const & x);
 std::istream & operator>>(std::istream & in, MoneyValue & x);
 
-}
 #endif//MONEYVALUE_H_INCLUDE_GUARD
