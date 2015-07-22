@@ -1,6 +1,9 @@
 #include "MoneyValue.h"
 #include <iostream>
 #include <String.h>
+#include <sstream>
+#include <cstring>
+#include <string>
 
 /// Constructors
 MoneyValue::MoneyValue(long m_int, long m_hund)
@@ -194,7 +197,32 @@ std::istream & operator>>(std::istream & in, MoneyValue & x)
 
 Library::String MoneyValue::ToString() const
 {
-
+    std::stringstream str;
+    if (m_value >= 10)
+    {
+        str << (m_value / 100) << "." << (m_value % 100) << "0";
+    }
+    if ((m_value > -100) && (m_value < -10))
+    {
+        str << "-" << m_value / 100 << "." <<(-1) * (m_value % 100);
+    }
+    if ((m_value > -10) && (m_value < 0))
+    {
+        str << "-0.0" << (-1) * (m_value % 100);
+    }
+    if ((m_value < 10) && (m_value > 0))
+    {
+        str << "0.0" << m_value % 100;
+    }
+    if ((m_value >= 0) && (m_value < 10) && (m_value % 10 == 0))
+    {
+        str << m_value / 100 << "." << m_value % 100 << "0";
+    }
+    if (m_value < -100)
+    {
+        str << m_value / 100 << "." << (-1) * (m_value % 100);
+    }
+    return str.str().c_str();
 }
 
 /// Functions
