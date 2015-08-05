@@ -2,7 +2,7 @@
 #define MONEYVALUE_H_INCLUDE_GUARD
 
 #include <iostream>
-#include <String.h>
+#include "String.h"
 
 struct MoneyValue
 {
