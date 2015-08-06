@@ -6,7 +6,6 @@
 
 struct MoneyValue
 {
-    friend std::ostream & operator<<(std::ostream & , MoneyValue const &);
     friend std::istream & operator>>(std::istream & in, MoneyValue & x);
 public:
     /// Constructors
@@ -32,12 +31,10 @@ public:
 
     /// Functions
     Library::String ToString () const;
-    void Print() const;
 
 private:
     long m_value;
 };
-std::ostream & operator<<(std::ostream & out, MoneyValue const & x);
 std::istream & operator>>(std::istream & in, MoneyValue & x);
 
 #endif//MONEYVALUE_H_INCLUDE_GUARD

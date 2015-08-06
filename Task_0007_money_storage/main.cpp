@@ -11,19 +11,19 @@ int main ()
     int days = 20;
     balance = balance + price;
     std::cout << "Add: ";
-    balance.Print();
+    //balance.Print();
     std::cout << std::endl;
     balance *= hours;
     std::cout << "Multiple by hour: ";
-    balance.Print();
+    //balance.Print();
     std::cout << std::endl;
     balance *= days;
     std::cout << "Multiple by hour: ";
-    balance.Print();
+    //balance.Print();
     std::cout << std::endl;
     balance -= error;
     std::cout << "adding error: ";
-    balance.Print();
+    //balance.Print();
     std::cout << std::endl;
     return 0;
 }
