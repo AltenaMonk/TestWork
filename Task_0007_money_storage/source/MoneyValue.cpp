@@ -5,7 +5,6 @@
 #include "cstring"
 #include <string>
 
-
 ///Friends
 std::istream & operator>>(std::istream & in, MoneyValue & x)
 {
