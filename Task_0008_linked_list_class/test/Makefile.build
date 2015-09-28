@@ -1,0 +1,60 @@
+root_dir	:= .
+
+#include *.mk
+
+compiler	:= g++
+linker		:= g++
+
+program_path	:= $(root_dir)/binaries/$(program_name)
+source_dir	:= $(root_dir)/source
+object_dir	:= $(root_dir)/object
+
+extended_dir	:= $(user_extended_dir)  $(test_extended_dir)
+include_dir	:= $(user_include_dir)   $(test_include_dir)
+exclude_files	:= $(user_exclude_files) $(test_exclude_files)
+compile_flags	:= $(user_compile_flags) $(test_compile_flags)
+# -Wall -Wextra -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast -Werror -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code -pedantic-errors
+link_flags      := $(user_link_flags) $(test_link_flags)
+
+target		:= $(MAKECMDGOALS)
+target_dir	:= $(object_dir)/$(target)/objects/
+VPATH		:= $(target_dir)
+
+source_subdirs	:= $(shell find -L $(source_dir) $(extended_dir) -type d)
+
+objects_dirs	:= $(addprefix $(target_dir), $(source_subdirs))
+
+objects		:= $(wildcard $(addsuffix /*.cpp, $(source_subdirs)))
+objects		:= $(filter-out $(exclude_files), $(objects))
+objects		:= $(objects:.cpp=.o)
+
+.PHONY: clean
+
+clean:
+	rm -rf $(object_dir)
+	rm -rf $(program_path)
+
+# если цель не clean и не dump - всё остальное собираем
+ifeq (,$(findstring $(MAKECMDGOALS), clean dump))
+dummy_mkdir := $(shell mkdir -p $(objects_dirs))
+
+$(target): $(program_path)
+	@echo "Done"
+
+d_files := $(addprefix $(target_dir), $(objects:.o=.d))
+-include $(d_files)
+endif
+
+$(program_path): $(objects)
+	@echo $(library_extended_dir)
+	rm -rf ./binaries
+	mkdir -p binaries
+	$(linker) -o $@ $(addprefix $(target_dir), $(objects)) $(link_flags)
+
+%.o:
+	$(compiler) -o $(target_dir)$@ -c $(@:%.o=%.cpp) $(compile_flags) $(include_dir)
+
+%.d:
+	@rm -f $@
+	@echo ...making: $@
+	@$(compiler) $(patsubst $(target_dir)%.d,%,./$@).cpp -M -MT $(patsubst $(target_dir)%.d,%,./$@).o -MT $@ -MF $@ $(include_dir)
