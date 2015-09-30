@@ -12,8 +12,7 @@ object_dir	:= $(root_dir)/object
 extended_dir	:= $(user_extended_dir)  $(test_extended_dir)
 include_dir	:= $(user_include_dir)   $(test_include_dir)
 exclude_files	:= $(user_exclude_files) $(test_exclude_files)
-compile_flags	:= $(user_compile_flags) $(test_compile_flags)
-# -Wall -Wextra -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast -Werror -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code -pedantic-errors
+compile_flags	:= $(user_compile_flags) $(test_compile_flags) -Wall -Wextra -Weffc++ -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast -Werror -Wconversion -Wsign-conversion -Winit-self -Wunreachable-code -pedantic-errors
 link_flags      := $(user_link_flags) $(test_link_flags)
 
 target		:= $(MAKECMDGOALS)
