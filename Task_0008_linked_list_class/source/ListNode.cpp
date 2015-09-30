@@ -12,8 +12,9 @@ ListNode::ListNode()
 
 ListNode::ListNode(ListNode const & from)
     : m_data(from.m_data)
-    , m_next(from.m_next)
+    , m_next( m_next == NULL ? NULL : new ListNode(*from.m_next))
 {
+
 }
 
 /// Operator =
