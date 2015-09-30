@@ -1,6 +1,20 @@
 #include "ListNode.h"
+#include <cstddef>
+#include <utility>
+
+ListNode::ListNode(ListNode const &from)
+    :m_data(from.m_data)
+    ,m_next(from.m_next)
+{
+}
 
 ListNode::ListNode()
+    :m_data(0)
+    ,m_next(NULL)
+{
+}
+
+ListNode::~ListNode()
 {
 }
 
@@ -27,4 +41,18 @@ void ListNode::SetData(int data)
 int ListNode::GetData()
 {
     return m_data;
+}
+
+ListNode & ListNode::operator=(ListNode const & from)
+{
+    m_data = from.m_data;
+    m_next = from.m_next;
+    return * this;
+}
+
+/// Functions
+void ListNode::Swap(ListNode &other)
+{
+    std::swap(m_data, other.m_data);
+    std::swap(m_next, other.m_next);
 }
