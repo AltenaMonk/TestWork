@@ -22,7 +22,7 @@ public:
     /// Functions
 
 private:
-    ListNode m_head;
+    ListNode * m_head;
 };
 
 #endif // LIST_H

@@ -4,7 +4,7 @@
 
 /// Constructors
 List::List()
-    :m_head(0)
+    :m_head(NULL)
 {
 }
 

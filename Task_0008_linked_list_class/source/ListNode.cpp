@@ -34,6 +34,9 @@ void ListNode::Swap(ListNode &other)
 /// Destructor
 ListNode::~ListNode()
 {
+    if (m_next == NULL) {
+        delete m_next;
+    }
 }
 
 /// Functions
@@ -57,7 +60,7 @@ void ListNode::SetData(int data)
     m_data = data;
 }
 
-int ListNode::GetData()
+int ListNode::GetData() const
 {
     return m_data;
 }
