@@ -2,15 +2,17 @@
 #include <cstddef>
 #include <utility>
 
-ListNode::ListNode(ListNode const & from)
-    : m_data(from.m_data)
-    , m_next(from.m_next)
-{
-}
 
+/// Constructor
 ListNode::ListNode()
     : m_data(0)
     , m_next(NULL)
+{
+}
+
+ListNode::ListNode(ListNode const & from)
+    : m_data(from.m_data)
+    , m_next(from.m_next)
 {
 }
 

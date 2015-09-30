@@ -6,8 +6,8 @@ class ListNode
 {
 public:
     /// Constructors
-    ListNode (ListNode const & from);
     ListNode ();
+    ListNode (ListNode const & from);
 
     /// Operator =
     ListNode & operator=(ListNode const & x);
