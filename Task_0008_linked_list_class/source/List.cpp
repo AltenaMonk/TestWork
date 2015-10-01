@@ -16,7 +16,8 @@ List::List(List const &from)
 /// Operator =
 List & List::operator=(List const & from)
 {
-    m_head = from.m_head;
+    List x(from);
+    Swap(x);
     return *this;
 }
 
