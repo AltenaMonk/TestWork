@@ -20,8 +20,8 @@ ListNode::ListNode(ListNode const & from)
 /// Operator =
 ListNode & ListNode::operator=(ListNode const & from)
 {
-    m_data = from.m_data;
-    m_next = m_next == NULL ? NULL : new ListNode( *from.m_next);
+    ListNode x(from);
+    Swap(x);
     return *this;
 }
 
@@ -32,10 +32,12 @@ void ListNode::Swap(ListNode &other)
     std::swap(m_next, other.m_next);
 }
 
+
 /// Destructor
 ListNode::~ListNode()
 {
-    if (m_next == NULL) {
+    if (m_next != NULL)
+    {
         delete m_next;
     }
 }
