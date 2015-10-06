@@ -35,3 +35,11 @@ List::~List()
         delete m_head;
     }
 }
+
+void List::PushFront(int data)
+{
+    ListNode * newFirstNode = new ListNode();
+    newFirstNode->SetData(data);
+    newFirstNode->SetNext(this->m_head);
+    this->m_head = newFirstNode;
+}

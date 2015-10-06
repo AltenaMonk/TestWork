@@ -20,6 +20,7 @@ public:
     ~List();
 
     /// Functions
+    void PushFront(int data);
 
 private:
     ListNode * m_head;
