@@ -49,15 +49,20 @@ void List::PushBack(int data)
     ListNode * newLastNode = new ListNode();
     newLastNode->SetData(data);
     newLastNode->SetNext(NULL);
-    GetTail()->SetNext(newLastNode);
+    ListNode * tail = GetTail();
+    if (tail == NULL)
+    {
+        m_head = newLastNode;
+    }
+    else
+    {
+        tail->SetNext(newLastNode);
+    }
 }
 
-int List::GetLength()
+int List::GetLength() const
 {
-    if (m_head == NULL) {
-        return 0;
-    }
-    ListNode * current = new ListNode();
+    ListNode const * current = m_head;
     int i = 0;
     for (;current != NULL; current = current->GetNext())
     {
@@ -68,9 +73,27 @@ int List::GetLength()
 
 ListNode * List::GetTail()
 {
+    if (m_head == NULL)
+    {
+        return NULL;
+    }
     ListNode * tail = m_head;
     for (;tail->GetNext() != NULL; tail = tail->GetNext())
-    {}
+    {
+    }
+    return tail;
+}
+
+ListNode const * List::GetTail() const
+{
+    if (m_head == NULL)
+    {
+        return NULL;
+    }
+    ListNode const * tail = m_head;
+    for (;tail->GetNext() != NULL; tail = tail->GetNext())
+    {
+    }
     return tail;
 }
 

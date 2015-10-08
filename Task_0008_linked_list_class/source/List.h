@@ -22,9 +22,9 @@ public:
     /// Functions
     void PushFront(int data);
     void PushBack(int data);
-    int GetLength();
+    int GetLength() const;
     ListNode * GetTail();
-    ListNode * GetTail() const;
+    ListNode const * GetTail() const;
     void Insert(int pos, int data);
 
 private:
