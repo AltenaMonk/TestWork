@@ -97,11 +97,44 @@ ListNode const * List::GetTail() const
     return tail;
 }
 
-/*void List::Insert(int pos, int data)
+ListNode * List::GetHead()
 {
-    if (m_head == NULL || pos - GetLength() > 1)
+    return m_head;
+}
+
+ListNode const * List::GetHead() const
+{
+    return m_head;
+}
+
+ListNode * List::Get(int number)
+{
+    ListNode * current = GetHead();
+    for (int i = 0; i < number || current != NULL; ++i, current = current->GetNext())
+    {
+    }
+    return current;
+}
+
+ListNode const * List::Get(int number) const
+{
+    ListNode const * current = GetHead();
+    for (int i = 0;i < number ||  current != NULL; ++i, current = current->GetNext())
+    {
+    }
+    return current;
+}
+
+ListNode * List::Insert(int pos, int data)
+{
+    ListNode * previous = Get(pos - 1);
+    if (previous == NULL)
     {
         return NULL;
     }
-    ListNode * previous  = new ListNode();
-}*/
+    ListNode * target = new ListNode();
+    target->SetData(data);
+    target->SetNext(previous->GetNext());
+    previous->SetNext(target);
+    return target;
+}

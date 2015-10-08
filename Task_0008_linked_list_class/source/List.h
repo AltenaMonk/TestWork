@@ -25,7 +25,12 @@ public:
     int GetLength() const;
     ListNode * GetTail();
     ListNode const * GetTail() const;
-    void Insert(int pos, int data);
+    ListNode * GetHead();
+    ListNode const * GetHead() const;
+    ListNode * Get(int number);
+    ListNode const * Get(int number) const;
+    ListNode * Insert(int pos, int data);
+    ListNode * PopFront();
 
 private:
     ListNode * m_head;
