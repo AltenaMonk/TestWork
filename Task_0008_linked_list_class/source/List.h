@@ -21,6 +21,11 @@ public:
 
     /// Functions
     void PushFront(int data);
+    void PushBack(int data);
+    int GetLength();
+    ListNode * GetTail();
+    ListNode * GetTail() const;
+    void Insert(int pos, int data);
 
 private:
     ListNode * m_head;

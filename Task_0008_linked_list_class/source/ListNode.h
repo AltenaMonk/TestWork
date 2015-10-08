@@ -26,7 +26,6 @@ public:
     int GetData() const;
 
 
-
 private:
     int m_data;
     ListNode * m_next;
