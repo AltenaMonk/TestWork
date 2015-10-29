@@ -31,6 +31,7 @@ public:
     ListNode const * Get(int number) const;
     ListNode * Insert(int pos, int data);
     ListNode * PopFront();
+    ListNode * PopTail();
 
 private:
     ListNode * m_head;

@@ -138,3 +138,34 @@ ListNode * List::Insert(int pos, int data)
     previous->SetNext(target);
     return target;
 }
+
+ListNode * List::PopFront()
+{
+    ListNode * head = GetHead();
+    if (head == NULL)
+    {
+        return NULL;
+    }
+    m_head = m_head->GetNext();
+    return head;
+}
+
+ListNode * List::PopTail()
+{
+    if (m_head == NULL)
+    {
+        return NULL;
+    }
+    ListNode * tail = m_head;
+    if (tail->GetNext() == NULL)
+    {
+        m_head = NULL;
+        return tail;
+    }
+    for (;tail->GetNext()->GetNext() != NULL; tail = tail->GetNext())
+    {
+    }
+    ListNode * last = tail->GetNext();
+    tail->SetNext(NULL);
+    return last;
+}
